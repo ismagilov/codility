@@ -10,14 +10,15 @@ class Peaks {
         int peaksNum = 0;
         
         for (int i = 1; i <= A.length - 2; i++) {
-            if (A[i] > A[i - 1] && A[i] > A[i + 1]) {
-                peaks[peaksNum] = i;
+            if (A[i] > A[i - 1] && A[i] > A[i + 1])
                 peaksNum++;
-            }
+                
+            peaks[i] = peaksNum;
         }
+        peaks[A.length - 1] = peaksNum;
         
-        if (peaksNum == 0)
-            return 0;
+        if (peaksNum < 2)
+            return peaksNum;
         
         int blocksNum = peaksNum;    
         do {
@@ -27,15 +28,16 @@ class Peaks {
             }
             
             int blockSize = A.length / blocksNum;
-            int blocksIdx = 0;
-            for (blocksIdx = 0; blocksIdx < blocksNum; blocksIdx++) {
-                if (peaks[blocksIdx] < blockSize * blocksIdx || 
-                peaks[blocksIdx] > blockSize * blocksIdx + blockSize - 1) {
+            int rIdx = 0;
+            int prevPeaksNum = 0;
+            for (rIdx = blockSize; rIdx < A.length + blockSize; rIdx += blockSize) {
+                if (peaks[rIdx - 1] == prevPeaksNum)
                     break;
-                }
+                
+                prevPeaksNum = peaks[rIdx - 1];
             }
              
-            if (blocksIdx == blocksNum)
+            if (rIdx == A.length + blockSize)
                 break;
             else 
                 blocksNum--;
