@@ -5,13 +5,26 @@ class CountNonDivisible {
     public int[] solution(int[] A) {
         int[] nonDivs = new int[A.length]; 
         
+        int [] count = new int[2 * A.length + 1];
+        for (int i = 0; i < A.length; i++)
+            count[A[i]]++;
+        
         for (int i = 0; i < A.length; i++) {
-            for (int j = 0; j < A.length; j++) {
-                if (i == j) continue;
+            int k = 1;
+            int divs = 0;
+            while (k * k <= A[i]) {
+                if (A[i] % k == 0) {
+                    divs += count[k];
+                 
+                    int k2 = A[i] / k;
+                    if (k2 != k)
+                        divs += count[k2];
+                }
                 
-                if (A[i] < A[j] || A[i] % A[j] != 0)
-                    nonDivs[i]++;
+                k++;
             }
+            
+            nonDivs[i] = A.length - divs;
         }
         
         return nonDivs;
