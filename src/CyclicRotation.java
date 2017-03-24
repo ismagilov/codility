@@ -6,21 +6,25 @@ class Solution {
         if (A.length == 0) return A;
         
         K = K % A.length;
-        
-        invert(A, 0, A.length - 1);
-        invert(A, K, A.length - 1);
-        invert(A, 0, K - 1);
+
+        int exchs = 0;
+        int startIdx = 0;
+        while (exchs < A.length) {
+            int curIdx = startIdx;
+            int cur = A[curIdx];
+            do {
+                int nextIdx = (curIdx + K) % A.length;
+                int tmp = A[nextIdx];
+                A[nextIdx] = cur;
+                exchs++;
+                
+                cur = tmp;
+                curIdx = nextIdx;
+            } while (curIdx != startIdx);
+            
+            startIdx++;
+        }
         
         return A;
-    }
-    
-    private void invert(int[] nums, int l, int r) {
-        while (l < r) {
-            int tmp = nums[l];
-            nums[l] = nums[r];
-            nums[r] = tmp;
-            l++;
-            r--;
-        }
     }
 }
