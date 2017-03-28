@@ -16,7 +16,7 @@ class Solution {
             if (fibs[i] - 1 == N)
                 return 1;
                 
-            if (fibs[i] < N && A[fibs[i] - 1] == 1)    
+            if (fibs[i] <= N && A[fibs[i] - 1] == 1)    
                 reached[fibs[i] - 1] = 1;   
         }
         
