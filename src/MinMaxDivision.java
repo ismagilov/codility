@@ -8,7 +8,7 @@ class Solution {
         
         for (int i = 0; i < A.length; i++) {
             maxSum += A[i];
-            minSum = Math.min(minSum, A[i]);
+            minSum = Math.max(minSum, A[i]);
         }
         
         int beg = minSum;
@@ -16,8 +16,6 @@ class Solution {
         int result = 0;
         while (beg <= end) {
             int mid = (beg + end) / 2;
-            
-            
             
             if (blocksNumber(A, K, mid)) {
                 result = mid;
@@ -41,12 +39,10 @@ class Solution {
             } else {
                 blockSum += A[i];
             }
-            
-            if (blockSum > maxSum)
-                return false;
         }
         
-        blocks++;
+        if (blockSum <= maxSum) //In principal, latest block is always less or equal to maxSum
+            blocks++;
         
         return blocks <= K;
     }
