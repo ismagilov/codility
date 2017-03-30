@@ -17,7 +17,9 @@ class Solution {
         while (beg <= end) {
             int mid = (beg + end) / 2;
             
-            if (blocksNumber(A, mid) <= K) {
+            
+            
+            if (blocksNumber(A, K, mid)) {
                 result = mid;
                 end = mid - 1;
             } else {
@@ -28,19 +30,24 @@ class Solution {
         return result;
     }
     
-    private int blocksNumber(int[] A, int maxSum) {
+    private boolean blocksNumber(int[] A, int K, int maxSum) {
         int blocks = 0;
         int blockSum = 0;
         
         for (int i = 0; i < A.length; i++) {
             if (blockSum + A[i] > maxSum) {
-                blocks++;
+                blocks++;                    
                 blockSum = A[i];
             } else {
                 blockSum += A[i];
             }
+            
+            if (blockSum > maxSum)
+                return false;
         }
         
-        return blocks + 1;
+        blocks++;
+        
+        return blocks <= K;
     }
 }
