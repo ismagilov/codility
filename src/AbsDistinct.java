@@ -5,11 +5,29 @@ import java.util.*;
 */
 class Solution {
     public int solution(int[] A) {
-        HashSet<Integer> distincts = new HashSet<>();
+        int b = 0, e = A.length - 1;
         
-        for (int i = 0; i < A.length; i++)
-            distincts.add(Math.abs(A[i]));
-            
-        return distincts.size();
+        long nums[] = new long[A.length];
+        
+        for (int i = 0; i < A.length; i++) {
+            if (Math.abs((long)A[b]) > Math.abs((long)A[e])) {
+                nums[i] = Math.abs((long)A[b]);
+                b++;
+            } else {
+                nums[i] = Math.abs((long)A[e]);
+                e--;
+            }
+        }
+
+        int cnt = 0;
+        long prev = -1;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != prev)
+                cnt++;
+                
+            prev = nums[i];    
+        }
+                
+        return cnt;
     }
 }
