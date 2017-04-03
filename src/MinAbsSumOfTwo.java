@@ -12,7 +12,7 @@ class Solution {
         
         Arrays.sort(A);
         
-        while (b <= e && b < A.length - 1) {
+        while (b <= e) {
             while (e >= b) {
                 int curMin = Math.abs(A[b] + A[e]);   
                 
