@@ -6,14 +6,13 @@ class Solution {
         if (B.length == 0)
             return 0;
             
-        int count = 0;
-        int lastLeft = B[B.length - 1] + 1;
-        for (int i = B.length - 1; i >= 0; i--) {
-            if (B[i] < lastLeft) {
+        int count = 1;
+        int lastIdx = 0;
+        
+        for (int i = 1; i < B.length; i++) {
+            if (A[i] > B[lastIdx]) {
                 count++;
-                lastLeft = A[i];
-            } else if (A[i] > lastLeft) {
-                lastLeft = A[i];
+                lastIdx = i;
             }
         }
         
