@@ -7,13 +7,13 @@ class Solution {
             return 0;
             
         int count = 0;
-        int mostLeft = B[B.length - 1] + 1;
+        int lastLeft = B[B.length - 1] + 1;
         for (int i = B.length - 1; i >= 0; i--) {
-            if (B[i] < mostLeft) {
+            if (B[i] < lastLeft) {
                 count++;
-                mostLeft = A[i];
-            } else if (A[i] < mostLeft) {
-                mostLeft = A[i];
+                lastLeft = A[i];
+            } else if (A[i] > lastLeft) {
+                lastLeft = A[i];
             }
         }
         
