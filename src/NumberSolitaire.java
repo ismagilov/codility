@@ -1,9 +1,13 @@
+import java.util.*;
+
 /**
 * https://codility.com/programmers/lessons/17-dynamic_programming/number_solitaire/
 */
 class Solution {
     public int solution(int[] A) {
         int[] max = new int[A.length];
+        
+        Arrays.fill(max, Integer.MIN_VALUE);
         
         max[0] = A[0];
         max[1] = A[0] + A[1];
